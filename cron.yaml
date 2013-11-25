@@ -1,4 +1,4 @@
 cron:
-- description: rank calculation
-  url: /atooma/rank
+- description: new issue checker
+  url: /check_new_issue
   schedule: every 20 hours

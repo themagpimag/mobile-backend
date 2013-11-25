@@ -1,2 +1,2 @@
-app_keys = {"gcm" : "17515127172",
+app_keys = {"gcm" : "AIzaSyCul0ic7KYVc76YRct2CiAAbM2beA45uDI",
             "app_secret": "betasecret"}
