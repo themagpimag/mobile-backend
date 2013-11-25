@@ -25,7 +25,7 @@ def check_new_issue():
     devices = Device.query().fetch()
     gcm = GCM(app_keys['gcm'])
     data = {}
-    data['id'] = '19'
+    data['id'] = last_issue['title']
     data['editorial'] = last_issue['editorial'].encode('utf8')
     data['title'] = last_issue['title']
     data['link'] = last_issue['pdf']
