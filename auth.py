@@ -2,9 +2,8 @@ from functools import wraps
 import os, sys, json
 sys.path.insert(1, os.path.join(os.path.abspath('.'), 'flask'))
 from flask import Flask, request, jsonify, Response
-import logging
 from hashlib import sha1
-import hmac, base64
+import logging, hmac, base64
 from auth_data import app_keys
 
 def requires_auth(f):
@@ -13,12 +12,12 @@ def requires_auth(f):
         #get request info
         verb = request.method
         url = request.url
-        date = request.headers["Datetime"]
-        content_md5 = request.headers["Content-Md5"]
+
         #check hmac
         (user_id, message_hmac) = request.headers["Hmac"].split(":")
-        to_sign = "%s\n%s\n%s\n%s" % (verb, content_md5, date, url)
-        logging.error("CHECK MAC")
+        content_md5 = request.headers["Content-Md5"]
+        datetime = request.headers["Datetime"]
+        to_sign = "%s\n%s\n%s\n%s" % (verb, content_md5, datetime, url)
         if not is_equal(message_hmac, calculate_hmac(to_sign)):
             return need_to_authenticate()
         return f(*args, **kwargs)

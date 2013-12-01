@@ -1,4 +1,5 @@
 cron:
 - description: new issue checker
   url: /check_new_issue
-  schedule: every 20 hours
+  target: mybackend
+  schedule: every 1 hours
