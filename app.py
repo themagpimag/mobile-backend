@@ -32,8 +32,7 @@ def check_new_issue():
     data['link'] = last_issue['pdf']
     data['image'] = last_issue['cover']
     data['date'] = last_issue['date']
-    device_query = Device.query()
-    devices, next_curs, more = device_query.fetch_page(20)
+    devices, next_curs, more = Device.query().fetch_page(10)
     while next_curs:
         for device in devices:
             try:
@@ -44,7 +43,7 @@ def check_new_issue():
                 pass
             except GCMUnavailableException:
                 pass
-        devices, next_curs, more = device_query.fetch_page(20, start_cursor=next_curs)
+        devices, next_curs, more = Device.query().fetch_page(10, start_cursor=next_curs)
     return jsonify( { 'status' : 'success' } ) , 200
 if __name__ == "__main__":
     app.run()
